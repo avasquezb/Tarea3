@@ -5,22 +5,26 @@
 
 using namespace std;
 
-int ConvierteANumero(string valor){   
+int Conv_Num(string valor){   
 	int n = atoi(valor.c_str()); 
     return n; 
 }
-
 bool esNumero(string valor){
-	int aux = atoi(valor.c_str());
-	//if(aux==0){
-	//	return false;
-	//}
-	//else{
+	if(Conv_Num(valor)==0){
 		return true;
-	//}
+	}
+	else{
+		int aux = atoi(valor.c_str());
+		if(aux==0){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
 }
-
-void mostrarMatriz(int matriz[][9]){
+void Mostrar(int matriz[][9]){
+	cout<<"Matriz"<<endl;
 	for(int i=0;i<9;i++){
 		for(int j=0;j<9;j++){
 			cout<<matriz[i][j]<<" ";
@@ -28,21 +32,6 @@ void mostrarMatriz(int matriz[][9]){
 		cout<<endl;
 	}
 }
-
-void extraerDatos(string argumento, string pos_i, string pos_j, string num){
-	pos_i=argumento.substr(1,1);
-	pos_j=argumento.substr(3,1);
-	num=argumento.substr(5,1);
-}
-
-void agregarNumero(){
-
-}
-
-void verificar(){
-
-}
-
 int main(int argc, char* argv[]){
 	int matriz[9][9];
 	for(int i=0;i<9;i++)
@@ -57,57 +46,52 @@ int main(int argc, char* argv[]){
 	{
 		while(argumento!="")
 		{
-			//extraerDatos(argumento, pos_i, pos_j, num);
 			pos_i=argumento.substr(1,1);
-			//cout<<pos_i<<endl;
 			pos_j=argumento.substr(3,1);
-			//cout<<pos_j<<endl;
 			num=argumento.substr(5,1);
-			//cout<<num<<endl;
 			if(esNumero(pos_i) && esNumero(pos_j) && esNumero(num))
 			{
-				//cout<<"si"<<endl;
-				if(ConvierteANumero(pos_i)>=0 && ConvierteANumero(pos_i)<9)
+				if(Conv_Num(pos_i)>=0 && Conv_Num(pos_i)<9)
 				{
-					if(ConvierteANumero(pos_j)>=0 && ConvierteANumero(pos_j)<9)
+					if(Conv_Num(pos_j)>=0 && Conv_Num(pos_j)<9)
 					{
-						if(ConvierteANumero(num)>=1 && ConvierteANumero(num)<=9)
+						if(Conv_Num(num)>=1 && Conv_Num(num)<=9)
 						{
-							if (matriz[ConvierteANumero(pos_i)][ConvierteANumero(pos_j)]==0)
+							if (matriz[Conv_Num(pos_j)][Conv_Num(pos_i)]==0)
 							{
-								matriz[ConvierteANumero(pos_i)][ConvierteANumero(pos_j)]=ConvierteANumero(num);
+								matriz[Conv_Num(pos_j)][Conv_Num(pos_i)]=Conv_Num(num);
 							}
 							else
 							{
-								cout<<"error de formato"<<endl;
+								cout<<"Dato ya ingresado en la posicion ("<<pos_i<<","<<pos_j<<")"<<endl;
 							}
-							//mostrarMatriz(matriz);
 						}
 						else
 						{
-							cout<<"error de formato"<<endl;
+							cout<<"Error de formato"<<endl;
 						}
 					}
 					else
 					{
-						cout<<"error de formato"<<endl;
+						cout<<"Error de formato"<<endl;
 					}
 				}
 				else
 				{
-					cout<<"error de formato"<<endl;
+					cout<<"Error de formato"<<endl;
 				}
 			}
 			else
 			{
-				cout<<"error de formato"<<endl;
+				cout<<"Error de formato"<<endl;
 			}
 			argumento=argumento.substr(7);
 		}
-		mostrarMatriz(matriz);
+		cout<<endl;
+		Mostrar(matriz);
 	}
 	else
 	{
-		cout<<"error de formato"<<endl;
+		cout<<"Error de formato"<<endl;
 	}
 }
